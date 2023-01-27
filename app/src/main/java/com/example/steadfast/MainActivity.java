@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
        // setContentView(R.layout.activity_main);
         setContentView(R.layout.login_page);
 
+        //TODO: These Commented out Functions need to be moved or figure out how they work
+
         //Initialize the ListView and set the adapter
       /*  mSupplementListView = findViewById(R.id.supplement_list_view);
         mSupplementAdapter = new SupplementAdapter(this, getSupplements());
