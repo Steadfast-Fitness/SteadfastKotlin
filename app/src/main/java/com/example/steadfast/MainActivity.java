@@ -19,10 +19,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+       // setContentView(R.layout.activity_main);
+        setContentView(R.layout.login_page);
 
         //Initialize the ListView and set the adapter
-        mSupplementListView = findViewById(R.id.supplement_list_view);
+      /*  mSupplementListView = findViewById(R.id.supplement_list_view);
         mSupplementAdapter = new SupplementAdapter(this, getSupplements());
         mSupplementListView.setAdapter(mSupplementAdapter);
 
@@ -33,15 +34,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 //TODO: Implement the action to be taken when the button is clicked
             }
-        });
+        });*/
     }
 
-    private ArrayList<Supplement> getSupplements() {
+   /* private ArrayList<Supplement> getSupplements() {
         //Initialize the list of supplements and add some data
         ArrayList<Supplement> supplements = new ArrayList<>();
         supplements.add(new Supplement("Vitamin C", "1000mg"));
         supplements.add(new Supplement("Fish Oil", "2000mg"));
         supplements.add(new Supplement("Turmeric", "500mg"));
         return supplements;
-    }
+    }*/
 }
