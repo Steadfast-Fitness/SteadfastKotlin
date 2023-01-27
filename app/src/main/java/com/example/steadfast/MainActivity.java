@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         });*/
     }
 
+
    /* private ArrayList<Supplement> getSupplements() {
         //Initialize the list of supplements and add some data
         ArrayList<Supplement> supplements = new ArrayList<>();
