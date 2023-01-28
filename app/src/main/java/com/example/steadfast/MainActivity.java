@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.Button;
+import android.widget.TextView;
 
 
 import java.util.ArrayList;
@@ -15,12 +16,24 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ListView mSupplementListView;
     private SupplementAdapter mSupplementAdapter;
+    Button buttonRegister;
+    Button buttonReg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
        // setContentView(R.layout.activity_main);
         setContentView(R.layout.login_page);
+
+        //buttonRegister = findViewById(R.id.registerbtn);
+        buttonReg = findViewById(R.id.registerbutton);
+
+        buttonReg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setContentView(R.layout.register_page);
+            }
+        });
 
         //TODO: These Commented out Functions need to be moved or figure out how they work
 
@@ -40,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-   /* private ArrayList<Supplement> getSupplements() {
+/* private ArrayList<Supplement> getSupplements() {
         //Initialize the list of supplements and add some data
         ArrayList<Supplement> supplements = new ArrayList<>();
         supplements.add(new Supplement("Vitamin C", "1000mg"));

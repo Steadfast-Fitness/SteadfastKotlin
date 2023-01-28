@@ -82,7 +82,7 @@
     <com.google.android.material.button.MaterialButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/registerbtn"
+        android:id="@+id/registerbutton"
         android:layout_below="@id/or"
         android:layout_centerHorizontal="true"
         android:text="Register"
