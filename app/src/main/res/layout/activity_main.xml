@@ -30,16 +30,17 @@
             android:onClick="openSupplements"/>
 
         <Button
+            android:id="@+id/Progression"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" "
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="Coming Soon..." />
 
         <Button
+            android:id="@+id/Online"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" "
-            style="?android:attr/buttonBarButtonStyle" />
+            android:text="Coming Soon... "
+            />
     </LinearLayout>
     <ListView
         android:id="@+id/supplement_list_view"

@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //TODO: Implement the action to be taken when the button is clicked
+                
             }
         });*/
     }
@@ -56,9 +57,9 @@ public class MainActivity extends AppCompatActivity {
 /* private ArrayList<Supplement> getSupplements() {
         //Initialize the list of supplements and add some data
         ArrayList<Supplement> supplements = new ArrayList<>();
-        supplements.add(new Supplement("Vitamin C", "1000mg"));
-        supplements.add(new Supplement("Fish Oil", "2000mg"));
-        supplements.add(new Supplement("Turmeric", "500mg"));
+        supplements.add(new Supplement("Vitamin C", " 1000mg"));
+        supplements.add(new Supplement("Fish Oil", " 2000mg"));
+        supplements.add(new Supplement("Turmeric", " 500mg"));
         return supplements;
     }*/
 }
