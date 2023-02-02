@@ -32,8 +32,20 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 setContentView(R.layout.register_page);
+                buttonRegister = findViewById(R.id.signinbtn);
+                buttonRegister.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View view) {
+                        setContentView(R.layout.login_page);
+                    }
+                });
             }
+
+
         });
+
+
 
         //TODO: These Commented out Functions need to be moved or figure out how they work
 

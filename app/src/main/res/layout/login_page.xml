@@ -59,7 +59,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/forgotpass"
-        android:layout_below="@id/registerbtn"
+        android:layout_below="@id/registerbutton"
         android:text="Forgot Password?"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"
@@ -80,13 +80,16 @@
         android:textSize="20dp" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/registerbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/registerbutton"
         android:layout_below="@id/or"
         android:layout_centerHorizontal="true"
-        android:text="Register"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="15dp"
         android:backgroundTint="#50ffffff"
-        android:layout_margin="15dp"/>
+        android:text="Register" />
 
 </RelativeLayout>
