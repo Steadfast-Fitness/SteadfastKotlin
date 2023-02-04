@@ -3,7 +3,9 @@ package com.example.steadfast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
@@ -16,9 +18,11 @@ public class LoginRegMenu extends AppCompatActivity {
     Button buttonRegister;
     Button buttonReg;
 
-    TextView Username;
-    TextView Password;
+    Button loginbtn;
 
+    EditText username;
+    EditText password;
+    TextView welcomename;
 
 
     @Override
@@ -29,9 +33,27 @@ public class LoginRegMenu extends AppCompatActivity {
 
         //buttonRegister = findViewById(R.id.registerbtn);
         buttonReg = findViewById(R.id.registerbutton);
+        loginbtn = findViewById(R.id.loginbtn);
 
-        buttonReg.setOnClickListener(new View.OnClickListener() {
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+
+        //Login Info
+        loginbtn.setOnClickListener(new View.OnClickListener() {
             @Override
+            public void onClick(View view) {
+                setContentView(R.layout.activity_main);
+                welcomename = findViewById(R.id.welcomename);
+                String User = username.getText().toString();
+                welcomename.setText("Welcome, "+User);
+            }
+
+
+        });
+
+        //Register Button
+        buttonReg.setOnClickListener(new View.OnClickListener() {
+                    @Override
             public void onClick(View view) {
                 setContentView(R.layout.register_page);
                 buttonRegister = findViewById(R.id.signinbtn);
