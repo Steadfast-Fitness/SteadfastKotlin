@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.TextView;
+import android.content.Intent;
+
+
 
 
 import java.util.ArrayList;
@@ -18,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private SupplementAdapter mSupplementAdapter;
     Button buttonRegister;
     Button buttonReg;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,11 +38,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 setContentView(R.layout.register_page);
                 buttonRegister = findViewById(R.id.signinbtn);
+
                 buttonRegister.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View view) {
+
                         setContentView(R.layout.login_page);
+
+                        //Refreshes that pages to allow the user to click Login and Register Multiple Times
+                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        startActivity(intent);
+
+
                     }
                 });
             }
