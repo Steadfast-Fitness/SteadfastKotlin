@@ -2,7 +2,6 @@ package com.example.steadfast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
@@ -11,16 +10,14 @@ import android.widget.TextView;
 import android.content.Intent;
 
 
-
-
-import java.util.ArrayList;
-
-
-public class MainActivity extends AppCompatActivity {
+public class LoginRegMenu extends AppCompatActivity {
     private ListView mSupplementListView;
     private SupplementAdapter mSupplementAdapter;
     Button buttonRegister;
     Button buttonReg;
+
+    TextView Username;
+    TextView Password;
 
 
 
@@ -47,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                         setContentView(R.layout.login_page);
 
                         //Refreshes that pages to allow the user to click Login and Register Multiple Times
-                        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                        Intent intent = new Intent(LoginRegMenu.this, LoginRegMenu.class);
                         startActivity(intent);
 
 

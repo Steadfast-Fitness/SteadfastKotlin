@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".LoginRegMenu">
 
     <TextView
         android:id="@+id/textView"
@@ -42,9 +42,10 @@
             android:text="Coming Soon... "
             />
     </LinearLayout>
+
     <ListView
         android:id="@+id/supplement_list_view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
 </LinearLayout>
