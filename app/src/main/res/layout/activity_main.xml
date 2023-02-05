@@ -32,29 +32,25 @@
         android:layout_marginTop="20dp">
 
         <Button
-            android:id="@+id/supps_button"
+            android:id="@+id/Supplements_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Supps"
-            android:onClick="openSupplements"/>
+            android:text="Supplements"
+            android:onClick="openSupplements" />
 
         <Button
-            android:id="@+id/Progression"
+            android:id="@+id/Progression_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coming Soon..." />
+            android:text="Progession" />
 
         <Button
-            android:id="@+id/Online"
+            android:id="@+id/Online_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Coming Soon... "
+            android:text="Group"
             />
     </LinearLayout>
 
-    <ListView
-        android:id="@+id/supplement_list_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>
