@@ -4,8 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Button;
 import android.content.Intent;
@@ -63,7 +65,7 @@ public class LoginMenu extends AppCompatActivity {
                             String[] data = new String[2];
                             data[0] = email;
                             data[1] = password;
-                            PutData putData = new PutData("http://steadfastfitness.online/login.php", "POST", field, data);
+                            PutData putData = new PutData("https://steadfastfitness.online/login.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
@@ -94,8 +96,12 @@ public class LoginMenu extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setContentView(R.layout.register_page);
+                Intent intent = new Intent(getApplicationContext(), RegisterMenu.class);
+                startActivity(intent);
+                finish();
             }
         });
+
+
     }
 }
