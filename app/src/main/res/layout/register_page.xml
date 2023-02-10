@@ -115,7 +115,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/registerbtn"
-        android:text="Already have an account? SignIn"
+        android:text="Already have an account? Sign In"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"/>
 
