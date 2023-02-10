@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,13 +20,13 @@ public class RegisterMenu extends AppCompatActivity {
     TextInputEditText textInputEditTextUsername, textInputEditTextEmail, textInputEditTextPassword, textInputEditTextReEnterPassword;
     ProgressBar progressBar;
     Button buttonRegister;
-    Button signInBtn;
+    TextView signInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_page);
-        signInBtn = findViewById(R.id.signinbtn);
+        signInBtn = findViewById(R.id.signInText);
         buttonRegister = findViewById(R.id.registerbtn);
         textInputEditTextUsername = findViewById(R.id.username);
         textInputEditTextEmail = findViewById(R.id.email);
