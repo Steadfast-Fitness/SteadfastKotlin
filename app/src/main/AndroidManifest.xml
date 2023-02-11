@@ -11,7 +11,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Steadfast"
         tools:targetApi="31">
-        <activity android:name=".LoginMenu"
+        <activity
+            android:name=".ForgotPassword"
+            android:exported="false" />
+        <activity
+            android:name=".LoginMenu"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,10 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-            <activity android:name=".RegisterMenu">
-
-            </activity>
-        <activity android:name=".MainMenu"/>
+        <activity android:name=".RegisterMenu"></activity>
+        <activity android:name=".MainMenu" />
     </application>
 
 </manifest>

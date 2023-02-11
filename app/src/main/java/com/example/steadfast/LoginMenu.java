@@ -31,7 +31,7 @@ public class LoginMenu extends AppCompatActivity {
     Button login;
     TextInputEditText textInputEditTextEmail, textInputEditTextPassword;
     ProgressBar progressBar;
-
+    TextView forgotPass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +42,9 @@ public class LoginMenu extends AppCompatActivity {
         textInputEditTextEmail = findViewById(R.id.email);
         textInputEditTextPassword = findViewById(R.id.password);
         progressBar = findViewById(R.id.progress);
+        forgotPass = findViewById(R.id.forgotpass);
 
+        // If user clicks "Login"
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +96,17 @@ public class LoginMenu extends AppCompatActivity {
             }
         });
 
+        // If user clicks "Forgot Password?"
+        forgotPass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(LoginMenu.this, "Enter email to reset password.", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(LoginMenu.this, ForgotPassword.class));
+            }
+        });
+
+
+        // If user clicks "Sign Up"
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
