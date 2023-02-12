@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "274200212894",
+    "project_id": "steadfast-eefc1",
+    "storage_bucket": "steadfast-eefc1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:274200212894:android:06c164f855350b5a44128f",
+        "android_client_info": {
+          "package_name": "com.example.steadfast"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "274200212894-q2lvmd1vulou1s8vkne6ov6vaifsv6ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyPShh-RvJZLUmwr8uUvGOJHbqRQKpCbc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "274200212894-q2lvmd1vulou1s8vkne6ov6vaifsv6ia.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

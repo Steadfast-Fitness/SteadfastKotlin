@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.text.InputType;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.content.Intent;
@@ -32,6 +35,7 @@ public class LoginMenu extends AppCompatActivity {
     TextInputEditText textInputEditTextEmail, textInputEditTextPassword;
     ProgressBar progressBar;
     TextView forgotPass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,6 +117,25 @@ public class LoginMenu extends AppCompatActivity {
                 Intent intent = new Intent(getApplicationContext(), RegisterMenu.class);
                 startActivity(intent);
                 finish();
+            }
+        });
+
+        //Show and hide passwords
+        ImageView imageViewShowHidePwd = findViewById(R.id.ic_hide_ped);
+        imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped);
+
+        imageViewShowHidePwd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(textInputEditTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
+                    // If is visible then hide it
+                    textInputEditTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                    //Change Icon
+                    imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped);
+                } else {
+                    textInputEditTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                    imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
+                }
             }
         });
 
