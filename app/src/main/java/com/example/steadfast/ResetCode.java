@@ -15,31 +15,32 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputEditText;
 import com.vishnusivadas.advanced_httpurlconnection.PutData;
 
-public class ForgotPassword extends AppCompatActivity {
+public class ResetCode extends AppCompatActivity {
 
-    private Button resetPass;
-    private TextInputEditText textEmail;
-    private ProgressBar progressBar;
     private TextView signin;
+    private ProgressBar progressBar;
+    private Button submitCode;
+    private TextInputEditText enterCode;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_forgot_password);
+        setContentView(R.layout.activity_reset_code);
         signin = findViewById(R.id.signInText);
-        textEmail = findViewById(R.id.email);
-        resetPass = findViewById(R.id.resetbtn);
         progressBar = findViewById(R.id.progress);
+        submitCode = findViewById(R.id.submitcode);
+        enterCode = findViewById(R.id.entercode);
 
 
-        resetPass.setOnClickListener(new View.OnClickListener() {
+        submitCode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email;
-                email = String.valueOf(textEmail.getText());
+                String code;
+                code = String.valueOf(enterCode.getText());
 
-                if(email.equals("")){
-                    Toast.makeText(getApplicationContext(), "Enter your email address.", Toast.LENGTH_SHORT).show();
+                if(code.equals("")){
+                    Toast.makeText(getApplicationContext(), "Enter the reset code.", Toast.LENGTH_SHORT).show();
                 }else {
                     progressBar.setVisibility(View.VISIBLE);
                     //Start ProgressBar first (Set visibility VISIBLE)
@@ -50,21 +51,19 @@ public class ForgotPassword extends AppCompatActivity {
                             //Starting Write and Read data with URL
                             //Creating array for parameters
                             String[] field = new String[1];
-                            field[0] = "email";
+                            field[0] = "code";
                             //Creating array for data
                             String[] data = new String[1];
-                            data[0] = email;
-                            PutData putData = new PutData("https://steadfastfitness.online/forgetpass.php", "POST", field, data);
+                            data[0] = code;
+                            PutData putData = new PutData("https://steadfastfitness.online/checkresetcode.php", "POST", field, data);
                             if (putData.startPut()) {
                                 if (putData.onComplete()) {
                                     progressBar.setVisibility(View.GONE);
                                     String result = putData.getResult();
                                     //End ProgressBar (Set visibility to GONE)
                                     Log.i("PutData", result);
-                                    if (result.equals("Reset Code Sent to Email")) {
-                                        Intent intent = new Intent(getApplicationContext(), ResetCode.class);
-                                        startActivity(intent);
-                                        finish();
+                                    if (result.equals("Code Correct")) {
+                                        setContentView(R.layout.activity_main);
                                     } else {
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                     }
@@ -75,8 +74,6 @@ public class ForgotPassword extends AppCompatActivity {
                 }
             }
         });
-
-
 
 
 
