@@ -63,7 +63,10 @@ public class ResetCode extends AppCompatActivity {
                                     //End ProgressBar (Set visibility to GONE)
                                     Log.i("PutData", result);
                                     if (result.equals("Code Correct")) {
-                                        setContentView(R.layout.activity_main);
+                                        Intent intent = new Intent(getApplicationContext(), NewPassword.class);
+                                        startActivity(intent);
+
+                                        finish();
                                     } else {
                                         Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
                                     }
@@ -74,8 +77,6 @@ public class ResetCode extends AppCompatActivity {
                 }
             }
         });
-
-
 
         // Takes the user back to the SignIn page
         signin.setOnClickListener(new View.OnClickListener() {

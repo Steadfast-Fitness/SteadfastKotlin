@@ -18,7 +18,8 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData;
 public class ForgotPassword extends AppCompatActivity {
 
     private Button resetPass;
-    private TextInputEditText textEmail;
+    public TextInputEditText textEmail;
+    public static String passEmail;
     private ProgressBar progressBar;
     private TextView signin;
 
@@ -37,6 +38,11 @@ public class ForgotPassword extends AppCompatActivity {
             public void onClick(View view) {
                 String email;
                 email = String.valueOf(textEmail.getText());
+                passEmail = email;
+
+                Intent sendEmail = new Intent(ForgotPassword.this, NewPassword.class);
+                sendEmail.putExtra("key", email);
+                startActivity(sendEmail);
 
                 if(email.equals("")){
                     Toast.makeText(getApplicationContext(), "Enter your email address.", Toast.LENGTH_SHORT).show();
@@ -75,7 +81,6 @@ public class ForgotPassword extends AppCompatActivity {
                 }
             }
         });
-
 
 
 

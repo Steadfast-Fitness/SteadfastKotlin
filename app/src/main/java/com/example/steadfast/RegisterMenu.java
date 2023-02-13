@@ -38,9 +38,12 @@ public class RegisterMenu extends AppCompatActivity {
         textInputEditTextReEnterPassword = findViewById(R.id.reenter_password);
         progressBar = findViewById(R.id.progress);
 
+
+
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 String username, email, password, reEnter;
                 username = String.valueOf(textInputEditTextUsername.getText());
                 email = String.valueOf(textInputEditTextEmail.getText());
