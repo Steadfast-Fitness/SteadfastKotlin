@@ -12,6 +12,9 @@
         android:theme="@style/Theme.Steadfast"
         tools:targetApi="31">
         <activity
+            android:name=".AccountAuthorization"
+            android:exported="false" />
+        <activity
             android:name=".NewPassword"
             android:exported="true" />
         <activity

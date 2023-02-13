@@ -25,6 +25,7 @@ public class RegisterMenu extends AppCompatActivity {
     ProgressBar progressBar;
     Button buttonRegister;
     TextView signInBtn;
+    public static String passEmail;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -49,6 +50,7 @@ public class RegisterMenu extends AppCompatActivity {
                 email = String.valueOf(textInputEditTextEmail.getText());
                 password = String.valueOf(textInputEditTextPassword.getText());
                 reEnter = String.valueOf(textInputEditTextReEnterPassword.getText());
+                passEmail = email;
 
                 if(!username.equals("") && !email.equals("") && !password.equals("")) {
                     if (!reEnter.equals(password)) {
@@ -79,8 +81,8 @@ public class RegisterMenu extends AppCompatActivity {
                                         String result = putData.getResult();
                                         //End ProgressBar (Set visibility to GONE)
                                         Log.i("PutData", result);
-                                        if (result.equals("Registration Successful. Check your inbox to verify your email address.")) {
-                                            Intent intent = new Intent(getApplicationContext(), MainMenu.class);
+                                        if (result.equals("Registration Successful. Check your inbox to for a code to verify your email address.")) {
+                                            Intent intent = new Intent(getApplicationContext(), AccountAuthorization.class);
                                             startActivity(intent);
                                             finish();
                                         } else {
