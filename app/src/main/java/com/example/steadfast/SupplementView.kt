@@ -33,6 +33,9 @@ class SupplementView : AppCompatActivity() {
             // which view you pass in doesn't matter, it is only used for the window tolken
             popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0)
 
+
+
+
             // dismiss the popup window when touched
             popupView.setOnTouchListener { v, event ->
                 popupWindow.dismiss()

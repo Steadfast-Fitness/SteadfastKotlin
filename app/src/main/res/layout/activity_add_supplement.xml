@@ -25,8 +25,10 @@
         android:layout_height="42dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="208dp"
+        android:layout_marginStart="211dp"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
         android:background="#60ffffff"
         android:textColor="@color/white" />
 
@@ -54,13 +56,28 @@
 
     <Spinner
         android:id="@+id/dropDown"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="92dp"
+        android:layout_height="42dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="181dp"
+        android:layout_marginStart="305dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:background="#60ffffff"
-        android:entries="@array/spinnerItems"/>
+        android:textAlignment="center"
+        android:entries="@array/spinnerItems"
+        />
+
+    <Button
+        android:id="@+id/addSupBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="83dp"
+        android:backgroundTint="#50ffffff"
+        android:hint="Add Supplement"
+        android:textColor="@color/black" />
 
 </RelativeLayout>
