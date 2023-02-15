@@ -1,144 +1,99 @@
-package com.example.steadfast;
+package com.example.steadfast
 
-import androidx.appcompat.app.AppCompatActivity;
+import android.content.Intent
+import android.os.Bundle
+import android.os.Handler
+import android.text.method.HideReturnsTransformationMethod
+import android.text.method.PasswordTransformationMethod
+import android.util.Log
+import android.view.View
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
+import com.vishnusivadas.advanced_httpurlconnection.PutData
 
-import android.os.Bundle;
 
-import android.text.InputType;
-import android.text.method.HideReturnsTransformationMethod;
-import android.text.method.PasswordTransformationMethod;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.Button;
-import android.content.Intent;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.android.material.textfield.TextInputEditText;
-import com.vishnusivadas.advanced_httpurlconnection.PutData;
 //
-public class LoginMenu extends AppCompatActivity {
+class LoginMenu : AppCompatActivity() {
 
-    TextView buttonRegister;
-    Button login;
-    TextInputEditText textInputEditTextEmail, textInputEditTextPassword;
-    ProgressBar progressBar;
-    TextView forgotPass;
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_page);
-        login = findViewById(R.id.loginbtn);
-        buttonRegister = findViewById(R.id.signUpText);
-        textInputEditTextEmail = findViewById(R.id.email);
-        textInputEditTextPassword = findViewById(R.id.password);
-        progressBar = findViewById(R.id.progress);
-        forgotPass = findViewById(R.id.forgotpass);
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.login_page)
+        var login = findViewById<Button>(R.id.loginbtn)
+        var buttonRegister = findViewById<TextView>(R.id.signUpText)
+        var textInputEditTextEmail = findViewById<TextInputEditText>(R.id.email)
+        var textInputEditTextPassword = findViewById<TextInputEditText>(R.id.password)
+        var progressBar = findViewById<ProgressBar>(R.id.progress)
+        var forgotPass = findViewById<TextView>(R.id.forgotpass)
 
         // If user clicks "Login"
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email, password;
-                email = String.valueOf(textInputEditTextEmail.getText());
-                password = String.valueOf(textInputEditTextPassword.getText());
-
-                if (!email.equals("") && !password.equals("")) {
-                    progressBar.setVisibility(View.VISIBLE);
-                    //Start ProgressBar first (Set visibility VISIBLE)
-                    Handler handler = new Handler();
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            //Starting Write and Read data with URL
-                            //Creating array for parameters
-                            String[] field = new String[2];
-                            field[0] = "email";
-                            field[1] = "password";
-                            //Creating array for data
-                            String[] data = new String[2];
-                            data[0] = email;
-                            data[1] = password;
-                            PutData putData = new PutData("https://steadfastfitness.online/login.php", "POST", field, data);
-                            if (putData.startPut()) {
-                                if (putData.onComplete()) {
-                                    progressBar.setVisibility(View.GONE);
-                                    String result = putData.getResult();
-                                    //End ProgressBar (Set visibility to GONE)
-                                    Log.i("PutData", result);
-                                    if (result.equals("Login Success")) {
-                                        Intent intent = new Intent(getApplicationContext(), MainMenu.class);
-                                        startActivity(intent);
-                                        finish();
-
-                                    } else {
-                                        Toast.makeText(getApplicationContext(), result, Toast.LENGTH_SHORT).show();
-                                    }
-                                }
+        login.setOnClickListener(View.OnClickListener {
+            val email: String = textInputEditTextEmail.text.toString()
+            val password: String = textInputEditTextPassword.text.toString()
+            if (email != "" && password != "") {
+                progressBar.visibility = View.VISIBLE
+                //Start ProgressBar first (Set visibility VISIBLE)
+                val handler = Handler()
+                handler.post {
+                    //Starting Write and Read data with URL
+                    //Creating array for parameters
+                    val field = arrayOfNulls<String>(2)
+                    field[0] = "email"
+                    field[1] = "password"
+                    //Creating array for data
+                    val data = arrayOfNulls<String>(2)
+                    data[0] = email
+                    data[1] = password
+                    val putData = PutData("https://steadfastfitness.online/login.php", "POST", field, data)
+                    if (putData.startPut()) {
+                        if (putData.onComplete()) {
+                            progressBar.visibility = View.GONE
+                            val result = putData.result
+                            //End ProgressBar (Set visibility to GONE)
+                            Log.i("PutData", result)
+                            if (result == "Login Success") {
+                                val intent = Intent(applicationContext, MainMenu::class.java)
+                                startActivity(intent)
+                                finish()
+                            } else {
+                                Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
                             }
-                            //End Write and Read data with URL
                         }
-                    });
-
-                } else {
-                    Toast.makeText(getApplicationContext(), "Email Or Password Incorrect", Toast.LENGTH_SHORT).show();
+                    }
+                    //End Write and Read data with URL
                 }
-
+            } else {
+                Toast.makeText(applicationContext, "Email Or Password Incorrect", Toast.LENGTH_SHORT).show()
             }
-        });
+        })
 
         // If user clicks "Forgot Password?"
-        forgotPass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(LoginMenu.this, "Enter email to reset password.", Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(LoginMenu.this, ForgotPassword.class));
-            }
-        });
+        forgotPass.setOnClickListener(View.OnClickListener {
+            Toast.makeText(this@LoginMenu, "Enter email to reset password.", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this@LoginMenu, ForgotPassword::class.java))
+        })
 
 
         // If user clicks "Sign Up"
-        buttonRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), RegisterMenu.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        buttonRegister.setOnClickListener(View.OnClickListener {
+            val intent = Intent(applicationContext, RegisterMenu::class.java)
+            startActivity(intent)
+            finish()
+        })
 
         //Show and hide passwords
-        ImageView imageViewShowHidePwd = findViewById(R.id.ic_hide_ped);
-        imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped);
-
-        imageViewShowHidePwd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(textInputEditTextPassword.getTransformationMethod().equals(HideReturnsTransformationMethod.getInstance())){
-                    // If is visible then hide it
-                    textInputEditTextPassword.setTransformationMethod(PasswordTransformationMethod.getInstance());
-                    //Change Icon
-                    imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped);
-                } else {
-                    textInputEditTextPassword.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
-                    imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd);
-                }
+        val imageViewShowHidePwd = findViewById<ImageView>(R.id.ic_hide_ped)
+        imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped)
+        imageViewShowHidePwd.setOnClickListener {
+            if (textInputEditTextPassword.transformationMethod == HideReturnsTransformationMethod.getInstance()) {
+                // If is visible then hide it
+                textInputEditTextPassword.transformationMethod = PasswordTransformationMethod.getInstance()
+                //Change Icon
+                imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped)
+            } else {
+                textInputEditTextPassword.transformationMethod = HideReturnsTransformationMethod.getInstance()
+                imageViewShowHidePwd.setImageResource(R.drawable.ic_show_pwd)
             }
-        });
-
-
+        }
     }
 }

@@ -1,50 +1,30 @@
-package com.example.steadfast;
+package com.example.steadfast
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.content.Intent
+import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 
-import androidx.appcompat.app.AppCompatActivity;
+class MainMenu : AppCompatActivity() {
 
-public class MainMenu extends AppCompatActivity{
-    Button mSupplementsButton;
-    Button mProgressionButton;
-    Button mGroupButton;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        mSupplementsButton = findViewById(R.id.Supplements_btn);
-        mProgressionButton = findViewById(R.id.Progression_btn);
-        mGroupButton = findViewById(R.id.Online_btn);
-
-        mSupplementsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), SupplementView.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        mProgressionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent progression = new Intent(MainMenu.this, Progression.class);
-                startActivity(progression);
-                finish();
-            }
-        });
-
-        mGroupButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "This feature is coming soon!", Toast.LENGTH_SHORT).show();
-            }
-        });
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        var mSupplementsButton = findViewById<Button>(R.id.Supplements_btn)
+        var mProgressionButton = findViewById<Button>(R.id.Progression_btn)
+        var mGroupButton = findViewById<Button>(R.id.Online_btn)
+        mSupplementsButton.setOnClickListener(View.OnClickListener {
+            val intent = Intent(applicationContext, SupplementView::class.java)
+            startActivity(intent)
+            finish()
+        })
+        mProgressionButton.setOnClickListener(View.OnClickListener {
+            val progression = Intent(this@MainMenu, Progression::class.java)
+            startActivity(progression)
+            finish()
+        })
+        mGroupButton.setOnClickListener(View.OnClickListener { Toast.makeText(applicationContext, "This feature is coming soon!", Toast.LENGTH_SHORT).show() })
     }
 }
