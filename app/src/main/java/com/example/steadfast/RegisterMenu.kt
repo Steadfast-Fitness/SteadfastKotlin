@@ -85,7 +85,6 @@ class RegisterMenu : AppCompatActivity() {
         })
 
         //Show and hide passwords
-        //Show and hide passwords
         val imageViewShowHidePwd = findViewById<ImageView>(R.id.hide_pwd)
         imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped)
         val imageViewShowHideRePwd = findViewById<ImageView>(R.id.hide_repwd)

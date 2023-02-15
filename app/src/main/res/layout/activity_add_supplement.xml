@@ -5,18 +5,62 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".AddSupplement"
-    android:background="@color/black">
+    android:background="#99000000">
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/addSupplement"
+        android:layout_width="190dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#60ffffff"
+        android:textColor="@color/white" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/addDosage"
+        android:layout_width="84dp"
+        android:layout_height="42dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="208dp"
+        android:layout_marginTop="10dp"
+        android:background="#60ffffff"
+        android:textColor="@color/white" />
 
     <TextView
+        android:id="@+id/supplementText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="58dp"
+        android:layout_marginTop="57dp"
+        android:text="Supplement"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/dosageText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="226dp"
+        android:layout_marginTop="57dp"
+        android:text="Dosage"
+        android:textColor="@color/white" />
+
+    <Spinner
+        android:id="@+id/dropDown"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/steadfast"
-        android:text="Add Supplement"
-        android:textColor="@color/black"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:textSize="25dp"
-        android:layout_marginTop="20dp"
-        android:background="#50ffffff"/>
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="181dp"
+        android:background="#60ffffff"
+        android:entries="@array/spinnerItems"/>
 
 </RelativeLayout>
