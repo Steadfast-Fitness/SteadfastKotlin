@@ -14,9 +14,10 @@ import com.google.android.material.textfield.TextInputEditText
 import com.vishnusivadas.advanced_httpurlconnection.PutData
 
 class ForgotPassword : AppCompatActivity() {
+    companion object{
+        var passEmail: String = ""
+    }
 
-
-    var passEmail = ""
 
     //push
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,8 +30,6 @@ class ForgotPassword : AppCompatActivity() {
         resetPass.setOnClickListener(View.OnClickListener {
             val email: String = textEmail.text.toString()
             passEmail = email
-
-
             if (email == "") {
                 Toast.makeText(applicationContext, "Enter your email address.", Toast.LENGTH_SHORT).show()
             } else {
@@ -73,6 +72,7 @@ class ForgotPassword : AppCompatActivity() {
             finish()
         })
     }
+
 
 
 

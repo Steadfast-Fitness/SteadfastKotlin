@@ -31,11 +31,12 @@ class NewPassword : AppCompatActivity() {
 
             val reEnter: String = reEnterPass.text.toString()
             val password: String = enterPass.text.toString()
-            val email: String = ForgotPassword :: passEmail.toString()
+            val email = ForgotPassword.passEmail
 
+            Log.i("test", email)
             if (password != "") {
                 if (reEnter != password) {
-                    Toast.makeText(applicationContext, "Passwords Do Not Match", Toast.LENGTH_SHORT).show()
+                     Toast.makeText(applicationContext, "Passwords Do Not Match", Toast.LENGTH_SHORT).show()
                 } else {
                     progressBar.visibility = View.VISIBLE
                     //Start ProgressBar first (Set visibility VISIBLE)
@@ -50,7 +51,12 @@ class NewPassword : AppCompatActivity() {
                         val data = arrayOfNulls<String>(2)
                         data[0] = email
                         data[1] = password
-                        val putData = PutData("https://steadfastfitness.online/changepass.php", "POST", field, data)
+                        val putData = PutData(
+                            "https://steadfastfitness.online/changepass.php",
+                            "POST",
+                            field,
+                            data
+                        )
                         if (putData.startPut()) {
                             if (putData.onComplete()) {
                                 progressBar.visibility = View.GONE
@@ -58,12 +64,14 @@ class NewPassword : AppCompatActivity() {
                                 //End ProgressBar (Set visibility to GONE)
                                 Log.i("PutData", result)
                                 if (result == "Password Reset. Please Login.") {
-                                    Toast.makeText(applicationContext, result, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(applicationContext, result, Toast.LENGTH_LONG)
+                                        .show()
                                     val intent = Intent(applicationContext, LoginMenu::class.java)
                                     startActivity(intent)
                                     finish()
                                 } else {
-                                    Toast.makeText(applicationContext, result, Toast.LENGTH_LONG).show()
+                                    Toast.makeText(applicationContext, result, Toast.LENGTH_LONG)
+                                        .show()
                                 }
                             }
                         }
@@ -71,8 +79,10 @@ class NewPassword : AppCompatActivity() {
                     }
                 }
             } else {
-                Toast.makeText(applicationContext, "All Fields Are Required", Toast.LENGTH_SHORT).show()
+                Toast.makeText(applicationContext, "All Fields Are Required", Toast.LENGTH_SHORT)
+                    .show()
             }
+
         })
         val imageViewShowHidePwd = findViewById<ImageView>(R.id.hide_pwd)
         imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped)

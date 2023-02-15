@@ -20,7 +20,7 @@ class AccountAuthorization : AppCompatActivity() {
         var progressBar = findViewById<ProgressBar>(R.id.progress)
         authorize.setOnClickListener(View.OnClickListener {
             val code: String = entercode.text.toString()
-            val email: String = RegisterMenu :: passEmail.toString()
+            val email = RegisterMenu.passEmail
             if (code == "") {
                 Toast.makeText(applicationContext, "Enter the authorization code.", Toast.LENGTH_SHORT).show()
             } else {

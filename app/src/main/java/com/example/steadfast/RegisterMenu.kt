@@ -15,7 +15,9 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData
 //
 class RegisterMenu : AppCompatActivity() {
 
-    var passEmail = ""
+    companion object{
+        var passEmail: String = ""
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
