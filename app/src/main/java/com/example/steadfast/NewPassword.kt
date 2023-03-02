@@ -88,7 +88,7 @@ class NewPassword : AppCompatActivity() {
         imageViewShowHidePwd.setImageResource(R.drawable.ic_hide_ped)
         val imageViewShowHideRePwd = findViewById<ImageView>(R.id.hide_repwd)
         imageViewShowHideRePwd.setImageResource(R.drawable.ic_hide_ped)
-        imageViewShowHidePwd.setOnClickListener {
+        imageViewShowHideRePwd.setOnClickListener {
             if (enterPass.transformationMethod == HideReturnsTransformationMethod.getInstance()) {
                 // If is visible then hide it
                 enterPass.transformationMethod = PasswordTransformationMethod.getInstance()
@@ -99,7 +99,7 @@ class NewPassword : AppCompatActivity() {
                 imageViewShowHideRePwd.setImageResource(R.drawable.ic_show_pwd)
             }
         }
-        imageViewShowHideRePwd.setOnClickListener {
+        imageViewShowHidePwd.setOnClickListener {
             if (reEnterPass.transformationMethod == HideReturnsTransformationMethod.getInstance()) {
                 // If is visible then hide it
                 reEnterPass.transformationMethod = PasswordTransformationMethod.getInstance()

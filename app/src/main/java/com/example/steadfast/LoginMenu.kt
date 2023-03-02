@@ -16,6 +16,10 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData
 //
 class LoginMenu : AppCompatActivity() {
 
+    companion object{
+        var passEmail: String = ""
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_page)
@@ -30,6 +34,7 @@ class LoginMenu : AppCompatActivity() {
         login.setOnClickListener(View.OnClickListener {
             val email: String = textInputEditTextEmail.text.toString()
             val password: String = textInputEditTextPassword.text.toString()
+            passEmail = email
             if (email != "" && password != "") {
                 progressBar.visibility = View.VISIBLE
                 //Start ProgressBar first (Set visibility VISIBLE)

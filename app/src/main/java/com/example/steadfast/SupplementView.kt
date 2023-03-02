@@ -1,24 +1,29 @@
 package com.example.steadfast
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.PopupWindow
-import android.widget.TextView
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.textfield.TextInputEditText
+import com.vishnusivadas.advanced_httpurlconnection.FetchData
+import com.vishnusivadas.advanced_httpurlconnection.PutData
 
 class SupplementView : AppCompatActivity() {
+
+
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supplement_view)
         var addSup = findViewById<ImageView>(R.id.addSupplement)
-        var popup = findViewById<TextView>(R.id.popup)
+
         addSup.setOnClickListener{ view -> // inflate the layout of the popup window
             val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val popupView = inflater.inflate(R.layout.activity_add_supplement, null)
@@ -31,10 +36,71 @@ class SupplementView : AppCompatActivity() {
 
             // show the popup window
             // which view you pass in doesn't matter, it is only used for the window tolken
-            popupWindow.showAtLocation(view, Gravity.BOTTOM, 0, 0)
+            popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
+            var addSupplements = popupView.findViewById<Button>(R.id.addSupBtn)
+            var supplementInput = popupView.findViewById<TextInputEditText>(R.id.addSupplementTxt)
+            var dosageInput = popupView.findViewById<TextInputEditText>(R.id.addDosage)
+            var gOrMG = popupView.findViewById<Spinner>(R.id.dropDown)
+            var amount = ""
+            var progressBar = popupView.findViewById<ProgressBar>(R.id.progress);
 
+            gOrMG.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
+                    amount = parent.getItemAtPosition(position) as String
+                }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // Do nothing
+                }
+            }
 
+            addSupplements.setOnClickListener{
+                var supplement: String = supplementInput.text.toString()
+                var dosage: String = dosageInput.text.toString()
+                val email = LoginMenu.passEmail
+
+                if(supplement != "" && dosage != ""){
+                    progressBar.visibility = View.VISIBLE
+                    //Start ProgressBar first (Set visibility VISIBLE)
+
+                    val handler = Handler()
+                    handler.post {
+                        //Starting Write and Read data with URL
+                        //Creating array for parameters
+                        val field = arrayOfNulls<String>(4)
+                        field[0] = "email"
+                        field[1] = "supplement"
+                        field[2] = "dosage"
+                        field[3] = "amount"
+                        //Creating array for data
+                        val data = arrayOfNulls<String>(4)
+                        data[0] = email
+                        data[1] = supplement
+                        data[2] = dosage
+                        data[3] = amount
+                        val putData = PutData("https://steadfastfitness.online/supplements/supplementstable.php", "POST", field, data)
+                        if (putData.startPut()) {
+                            if (putData.onComplete()) {
+                                progressBar.visibility = View.GONE
+                                val result = putData.result
+                                //End ProgressBar (Set visibility to GONE)
+                                Log.i("PutData", result)
+                                if (result == "Code Correct") {
+                                    val intent = Intent(applicationContext, SupplementView::class.java)
+                                    startActivity(intent)
+                                    finish()
+                                } else {
+                                    Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                        }
+                    }
+
+                }else {
+                    Toast.makeText(applicationContext, "Enter the Supplement and Dosage", Toast.LENGTH_SHORT).show()
+                }
+            }
+1
 
             // dismiss the popup window when touched
             popupView.setOnTouchListener { v, event ->
@@ -42,5 +108,50 @@ class SupplementView : AppCompatActivity() {
                 true
             }
         }
+
+
+        //Pushing email for view of the list
+        val email = LoginMenu.passEmail
+        val handlers = Handler()
+        handlers.post {
+            val field = arrayOfNulls<String>(1)
+            field[0] = "email"
+
+            val data = arrayOfNulls<String>(1)
+            data[0] = email
+
+            PutData("https://steadfastfitness.online/supplements/getsupplements.php", "POST", field, data)
+        }
+
+        // Creating the view of the list
+
+        var progressBar = findViewById<ProgressBar>(R.id.progress);
+        var supplement: String = ""
+        var dosage: String = ""
+        var amount: String = ""
+        val handler = Handler()
+        handler.post {
+            //Starting Write and Read data with URL
+            //Creating array for parameters
+            val field = arrayOfNulls<String>(3)
+            field[0] = "supplement"
+            field[1] = "dosage"
+            field[2] = "amount"
+            //Creating array for data
+            val data = arrayOfNulls<String>(3)
+            data[0] = supplement
+            data[1] = dosage
+            data[2] = amount
+            val fetchData =
+               FetchData("https://steadfastfitness.online/supplements/supplementstable.php")
+            if (fetchData.startFetch()) {
+                if (fetchData.onComplete()) {
+                    val result = fetchData.result
+                    progressBar.visibility = View.GONE
+                    Log.i("FetchData", result)
+                }
+            }
+        }
+
     }
 }

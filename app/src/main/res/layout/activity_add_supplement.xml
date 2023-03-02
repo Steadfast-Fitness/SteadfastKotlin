@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/addSupplement"
+        android:id="@+id/addSupplementTxt"
         android:layout_width="190dp"
         android:layout_height="42dp"
         android:layout_marginStart="10dp"
@@ -79,5 +79,12 @@
         android:backgroundTint="#50ffffff"
         android:hint="Add Supplement"
         android:textColor="@color/black" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
