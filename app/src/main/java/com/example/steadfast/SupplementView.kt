@@ -122,6 +122,7 @@ class SupplementView : AppCompatActivity() {
 
             PutData("https://steadfastfitness.online/supplements/getsupplements.php", "POST", field, data)
         }
+        Log.i("OnLoadTest", email)
 
         // Creating the view of the list
 
