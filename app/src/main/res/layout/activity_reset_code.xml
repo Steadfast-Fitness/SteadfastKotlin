@@ -52,10 +52,20 @@
         android:text="Submit" />
 
     <TextView
-        android:id="@+id/signInText"
+        android:id="@+id/reSendCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/submitcode"
+        android:text="Resend code"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="15dp"/>
+
+    <TextView
+        android:id="@+id/signInText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/reSendCode"
         android:text="Don't need a code? Sign In"
         android:textColor="@color/white"
         android:layout_centerHorizontal="true"/>

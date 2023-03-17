@@ -5,7 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SupplementView"
-    android:background="@color/black">
+    android:background="@color/white">
+
+    <!-- <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swiperefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/> -->
 
     <TextView
         android:layout_width="match_parent"
@@ -32,7 +38,12 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/addSupplement"/>
+        android:id="@+id/supplementList"
+        android:layout_below="@id/addSupplement"
+        android:clickable="false"
+        android:focusable="false"/>
+
+
 
     <ProgressBar
         android:id="@+id/progress"

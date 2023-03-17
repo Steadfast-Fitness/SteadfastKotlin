@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.textfield.TextInputEditText
 import com.vishnusivadas.advanced_httpurlconnection.PutData
+import org.w3c.dom.Text
 
 //push
 class ResetCode : AppCompatActivity() {
@@ -54,6 +55,31 @@ class ResetCode : AppCompatActivity() {
                                 Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
                             }
                         }
+                    }
+                }
+            }
+        })
+
+
+        var reSend = findViewById<TextView>(R.id.reSendCode)
+        val email = ForgotPassword.passEmail
+        Log.i("Email", email)
+
+        reSend.setOnClickListener(View.OnClickListener {
+            progressBar.visibility = View.VISIBLE
+            val handler = Handler()
+            handler.post {
+                val field = arrayOfNulls<String>(1)
+                field[0] = "email"
+                val data = arrayOfNulls<String>(1)
+                data[0] = email
+                val putData = PutData("https://steadfastfitness.online/authentication/resendcode.php", "POST", field, data)
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        progressBar.visibility = View.GONE
+                        val result = putData.result
+                        Log.i("PutData", result)
+                        Toast.makeText(applicationContext, "A new code has been sent to your email.", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

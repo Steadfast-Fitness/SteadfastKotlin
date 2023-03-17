@@ -2,5 +2,6 @@
     <string name="app_name">Steadfast</string>
     <string name="supplement_name">Supplement Name</string>
     <string name="supplement_dosage">Supplement Dosage</string>
+    <string name="supplement_amount">Supplement Amount</string>
     <string name="taken">Taken</string>
 </resources>

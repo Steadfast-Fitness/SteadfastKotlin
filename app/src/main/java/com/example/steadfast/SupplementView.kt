@@ -10,19 +10,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
 import com.vishnusivadas.advanced_httpurlconnection.FetchData
 import com.vishnusivadas.advanced_httpurlconnection.PutData
 
+
 class SupplementView : AppCompatActivity() {
 
-
+    private lateinit var listView: ListView
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supplement_view)
         var addSup = findViewById<ImageView>(R.id.addSupplement)
+        listView = findViewById(R.id.supplementList)
 
         addSup.setOnClickListener{ view -> // inflate the layout of the popup window
             val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -60,6 +68,7 @@ class SupplementView : AppCompatActivity() {
                 val email = LoginMenu.passEmail
 
                 if(supplement != "" && dosage != ""){
+
                     progressBar.visibility = View.VISIBLE
                     //Start ProgressBar first (Set visibility VISIBLE)
 
@@ -109,50 +118,50 @@ class SupplementView : AppCompatActivity() {
             }
         }
 
-
-        //Pushing email for view of the list
-        val email = LoginMenu.passEmail
-        val handlers = Handler()
-        handlers.post {
-            val field = arrayOfNulls<String>(1)
-            field[0] = "email"
-
-            val data = arrayOfNulls<String>(1)
-            data[0] = email
-
-            PutData("https://steadfastfitness.online/supplements/getsupplements.php", "POST", field, data)
-        }
-        Log.i("OnLoadTest", email)
-
         // Creating the view of the list
 
-        var progressBar = findViewById<ProgressBar>(R.id.progress);
-        var supplement: String = ""
-        var dosage: String = ""
-        var amount: String = ""
-        val handler = Handler()
-        handler.post {
-            //Starting Write and Read data with URL
-            //Creating array for parameters
-            val field = arrayOfNulls<String>(3)
-            field[0] = "supplement"
-            field[1] = "dosage"
-            field[2] = "amount"
-            //Creating array for data
-            val data = arrayOfNulls<String>(3)
-            data[0] = supplement
-            data[1] = dosage
-            data[2] = amount
-            val fetchData =
-               FetchData("https://steadfastfitness.online/supplements/supplementstable.php")
-            if (fetchData.startFetch()) {
-                if (fetchData.onComplete()) {
-                    val result = fetchData.result
-                    progressBar.visibility = View.GONE
-                    Log.i("FetchData", result)
+
+        val url = "https://steadfastfitness.online/supplements/getsupplements.php"
+        val email = LoginMenu.passEmail
+
+        val request = object : StringRequest(
+            Request.Method.POST, url,
+            Response.Listener<String> { response ->
+                // Response received successfully
+                val responseString = response // Store the response in a variable
+                Log.d("TAG", "Response: $responseString")
+                data class Supplement(
+                    @SerializedName("supplement") val name: String,
+                    @SerializedName("dosage") val dosage: String,
+                    @SerializedName("amount") val amount: String
+                )
+
+                val json = responseString
+                val supplements = Gson().fromJson(json, Array<Supplement>::class.java).toList()
+
+                for (supplement in supplements) {
+                    Log.d("TAG", "Supplement Name: ${supplement.name}")
+                    Log.d("TAG", "Supplement Dosage: ${supplement.dosage}")
+                    Log.d("TAG", "Supplement Amount: ${supplement.amount}")
                 }
+
+            },
+            Response.ErrorListener { error ->
+                // Error occurred while making the request
+                Log.e("TAG", "Error: ${error.message}")
+            }) {
+
+            // Add the POST parameters to the request
+            override fun getParams(): Map<String, String> {
+                val params = HashMap<String, String>()
+                params["email"] = email
+                return params
             }
+
         }
+
+// Add the request to the Volley request queue
+        Volley.newRequestQueue(applicationContext).add(request)
 
     }
 }
