@@ -1,5 +1,6 @@
 package com.example.steadfast
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -34,6 +35,47 @@ class LoginMenu : AppCompatActivity() {
         var progressBar = findViewById<ProgressBar>(R.id.progress)
         var forgotPass = findViewById<TextView>(R.id.forgotpass)
 
+        val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        val email = sharedPreferences.getString("email", "")
+        val password = sharedPreferences.getString("password", "")
+
+        // Set email and password fields if they exist
+        if (!email.isNullOrEmpty()) {
+            textInputEditTextEmail.setText(email)
+        }
+        if (!password.isNullOrEmpty()) {
+            textInputEditTextPassword.setText(password)
+        }
+
+        // If both email and password are available, automatically log in the user
+        if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+            progressBar.visibility = View.VISIBLE
+            val handler = Handler()
+            handler.post {
+                val field = arrayOfNulls<String>(2)
+                field[0] = "email"
+                field[1] = "password"
+                val data = arrayOfNulls<String>(2)
+                data[0] = email
+                data[1] = password
+                val putData = PutData("https://steadfastfitness.online/login.php", "POST", field, data)
+                if (putData.startPut()) {
+                    if (putData.onComplete()) {
+                        progressBar.visibility = View.GONE
+                        val result = putData.result
+                        Log.i("PutData", result)
+                        if (result == "Login Success") {
+                            val intent = Intent(applicationContext, MainMenu::class.java)
+                            startActivity(intent)
+                            finish()
+                        } else {
+                            Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            }
+        }
+
         // If user clicks "Login"
         login.setOnClickListener(View.OnClickListener {
             val email: String = textInputEditTextEmail.text.toString()
@@ -64,6 +106,12 @@ class LoginMenu : AppCompatActivity() {
                                 val intent = Intent(applicationContext, MainMenu::class.java)
                                 startActivity(intent)
                                 finish()
+                                // Save login information
+                                val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+                                val editor = sharedPreferences.edit()
+                                editor.putString("email", email)
+                                editor.putString("password", password)
+                                editor.apply()
                             } else {
                                 Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
                             }
