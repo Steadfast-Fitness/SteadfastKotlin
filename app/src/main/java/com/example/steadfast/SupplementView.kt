@@ -97,7 +97,6 @@ class SupplementView : AppCompatActivity() {
                                 if (result == "Code Correct") {
                                     val intent = Intent(applicationContext, SupplementView::class.java)
                                     startActivity(intent)
-                                    finish()
                                 } else {
                                     Toast.makeText(applicationContext, result, Toast.LENGTH_SHORT).show()
                                 }
@@ -130,20 +129,20 @@ class SupplementView : AppCompatActivity() {
                 // Response received successfully
                 val responseString = response // Store the response in a variable
                 Log.d("TAG", "Response: $responseString")
-                data class Supplement(
+              /*  data class Supplement(
                     @SerializedName("supplement") val name: String,
                     @SerializedName("dosage") val dosage: String,
                     @SerializedName("amount") val amount: String
-                )
+                ) */
 
-                val json = responseString
+              /*  val json = responseString
                 val supplements = Gson().fromJson(json, Array<Supplement>::class.java).toList()
 
                 for (supplement in supplements) {
                     Log.d("TAG", "Supplement Name: ${supplement.name}")
                     Log.d("TAG", "Supplement Dosage: ${supplement.dosage}")
                     Log.d("TAG", "Supplement Amount: ${supplement.amount}")
-                }
+                } */
 
             },
             Response.ErrorListener { error ->
@@ -163,5 +162,10 @@ class SupplementView : AppCompatActivity() {
 // Add the request to the Volley request queue
         Volley.newRequestQueue(applicationContext).add(request)
 
+    }
+    override fun onBackPressed() {
+        val intent = Intent(this, MainMenu::class.java)
+        startActivity(intent)
+        finish()
     }
 }
