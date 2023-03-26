@@ -35,15 +35,11 @@
         android:layout_marginTop="65dp"
         app:srcCompat="@android:drawable/ic_menu_add" />
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/supplementList"
-        android:layout_below="@id/addSupplement"
-        android:clickable="false"
-        android:focusable="false"/>
-
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/addSupplement" />
 
     <ProgressBar
         android:id="@+id/progress"

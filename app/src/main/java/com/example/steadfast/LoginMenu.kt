@@ -38,6 +38,9 @@ class LoginMenu : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         val email = sharedPreferences.getString("email", "")
         val password = sharedPreferences.getString("password", "")
+        if (email != null) {
+            passEmail = email
+        }
 
         // Set email and password fields if they exist
         if (!email.isNullOrEmpty()) {

@@ -18,44 +18,47 @@
         android:layout_marginTop="20dp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/welcomename"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="center"
-        android:text="" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginTop="20dp"
         android:gravity="center"
-        android:layout_marginTop="20dp">
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="89dp"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            app:srcCompat="@drawable/menu"
+            android:layout_gravity="left"
+            />
 
         <Button
             android:id="@+id/Supplements_btn"
             android:layout_width="200dp"
             android:layout_height="175dp"
             android:text="Supplements"
-            android:textSize="20dp"
-            />
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/Progression_btn"
             android:layout_width="200dp"
             android:layout_height="175dp"
-            android:textSize="20dp"
-            android:text="Progession" />
+            android:text="Progression"
+            android:textSize="20dp" />
 
         <Button
             android:id="@+id/Online_btn"
             android:layout_width="200dp"
-            android:textSize="20dp"
             android:layout_height="175dp"
             android:text="Group"
+            android:textSize="20dp"
             />
+
     </LinearLayout>
+
     <!-- s -->
 
 </LinearLayout>

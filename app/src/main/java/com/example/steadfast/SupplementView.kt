@@ -10,6 +10,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
@@ -23,14 +25,17 @@ import com.vishnusivadas.advanced_httpurlconnection.PutData
 
 class SupplementView : AppCompatActivity() {
 
-    private lateinit var listView: ListView
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var supplementAdapter: SupplementAdapter
+    private lateinit var supplementsList: MutableList<Supplement>
+    private lateinit var progressBar: ProgressBar
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_supplement_view)
         var addSup = findViewById<ImageView>(R.id.addSupplement)
-        listView = findViewById(R.id.supplementList)
+        recyclerView = findViewById(R.id.supplementList)
 
         addSup.setOnClickListener{ view -> // inflate the layout of the popup window
             val inflater = getSystemService(LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -122,6 +127,8 @@ class SupplementView : AppCompatActivity() {
 
         val url = "https://steadfastfitness.online/supplements/getsupplements.php"
         val email = LoginMenu.passEmail
+        val supplementsList = mutableListOf<Supplement>()
+        Log.i("Email", email)
 
         val request = object : StringRequest(
             Request.Method.POST, url,
@@ -129,20 +136,19 @@ class SupplementView : AppCompatActivity() {
                 // Response received successfully
                 val responseString = response // Store the response in a variable
                 Log.d("TAG", "Response: $responseString")
-              /*  data class Supplement(
-                    @SerializedName("supplement") val name: String,
-                    @SerializedName("dosage") val dosage: String,
-                    @SerializedName("amount") val amount: String
-                ) */
 
-              /*  val json = responseString
-                val supplements = Gson().fromJson(json, Array<Supplement>::class.java).toList()
 
-                for (supplement in supplements) {
-                    Log.d("TAG", "Supplement Name: ${supplement.name}")
-                    Log.d("TAG", "Supplement Dosage: ${supplement.dosage}")
-                    Log.d("TAG", "Supplement Amount: ${supplement.amount}")
-                } */
+                val supplements = Gson().fromJson(responseString, Array<Supplement>::class.java).toList()
+
+                supplementsList.addAll(supplements)
+                supplementAdapter = SupplementAdapter(supplementsList)
+                recyclerView.adapter = supplementAdapter
+                supplementAdapter.notifyDataSetChanged()
+                recyclerView.setLayoutManager(LinearLayoutManager(this));
+
+
+
+
 
             },
             Response.ErrorListener { error ->
@@ -156,16 +162,14 @@ class SupplementView : AppCompatActivity() {
                 params["email"] = email
                 return params
             }
-
         }
-
 // Add the request to the Volley request queue
         Volley.newRequestQueue(applicationContext).add(request)
-
     }
     override fun onBackPressed() {
         val intent = Intent(this, MainMenu::class.java)
         startActivity(intent)
         finish()
     }
+
 }
