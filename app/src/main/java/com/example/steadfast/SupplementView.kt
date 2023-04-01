@@ -112,6 +112,7 @@ class SupplementView : AppCompatActivity() {
                 }else {
                     Toast.makeText(applicationContext, "Enter the Supplement and Dosage", Toast.LENGTH_SHORT).show()
                 }
+                recreate()
             }
 1
 
